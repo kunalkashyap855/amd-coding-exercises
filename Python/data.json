@@ -1,0 +1,7 @@
+{
+    "superheros": [
+        { "name": "batman", "id": 1, "city": "gotham" }, 
+        { "name": "spiderman", "id": 2, "city": "NYC" }, 
+        { "name": "superman", "id": 2, "city": "NYC" }
+    ] 
+}
