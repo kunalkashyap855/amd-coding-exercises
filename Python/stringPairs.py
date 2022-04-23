@@ -1,22 +1,22 @@
+def stringPairs(inputStr):
+    # Base case for input string with odd length
+    if len(inputStr) == 1:
+        return [(inputStr[0],)]
+
+    # Base case for input string with even length
+    if len(inputStr) == 2:
+        return [(inputStr[0], inputStr[1])]
+    
+    output = stringPairs(inputStr[1:-1])
+    output = [(inputStr[0], inputStr[-1])] + output
+
+    return output
+
 def main():
     # inputStr = "12345678"
     inputStr = "123R456"
-    output = []
-
-    left, right = 0, len(inputStr) - 1
-
-    # Using two pointers, one from the left end of list and the other from the right
-    # The loop will run untill the two pointers meet or pass each other
-    while left < right:
-        output.append((inputStr[left], inputStr[right]))
-        left += 1
-        right -= 1
-
-    # For input string with odd length
-    if left == right:
-        output.append((inputStr[left],))
-
-    print(output) 
+    
+    print(stringPairs(inputStr)) 
 
 
 
