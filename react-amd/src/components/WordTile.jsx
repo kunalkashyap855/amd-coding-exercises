@@ -1,8 +1,10 @@
 import React from 'react'
 
-const WordTile = ({ word }) => {
+import styles from "./WordTile.module.css";
+
+const WordTile = ({ word, onRemove }) => {
   return (
-    <div>{word}</div>
+    <div className={styles.tile} onClick={() => onRemove(word)}>{word}</div>
   )
 }
 
