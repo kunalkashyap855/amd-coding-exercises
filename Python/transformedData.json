@@ -1,6 +1,1 @@
-{
-    "superherosbyCity": [
-        {"gotham": ["batman"]}, 
-        {"NYC": ["spiderman", "superman"]}
-    ]
-}
+{"superherosbyCity": [{"gotham": ["batman"]}, {"NYC": ["spiderman", "superman"]}]}

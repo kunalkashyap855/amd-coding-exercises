@@ -1,9 +1,14 @@
+# I have made the assumption that if the input array is empty,
+# the function will return -1
+
 def max(arr):
     if len(arr) == 0:
-        return 0
+        return -1
 
+    # Recursively finding the max element in the rest of array (removing the first element)
     currMax = max(arr[1:])
 
+    # comparing the first element to the max element found recursively for the rest of the array
     if arr[0] > currMax:
         return arr[0]
 
