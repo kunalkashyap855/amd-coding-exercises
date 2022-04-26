@@ -1,16 +1,57 @@
 .tile {
-    /* border: 1px solid #b9b9b9d4; */
-    /* background-color: lightgrey; */
     width: 50%;
     height: 100%;
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.tileFadeOut {
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-animation: fadeout .35s linear forwards;
+    animation: fadeout .35s linear forwards;
 }
 
 .tile:hover {
-    border: 2px solid rgb(227, 70, 70);
-    background-color: rgb(240, 119, 119);
+    border: 2px solid rgb(70, 17, 17);
+    background-color: #f21361;
     color: white;
+    animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(2px, 0, 0);
+    }
+}
+
+@-webkit-keyframes fadeout {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+    
+@keyframes fadeout {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }

@@ -1,22 +1,18 @@
 import React, { useState } from 'react'
 import { Grid, Button, IconButton, TextField } from "@mui/material"
-// import { useTransition, animated } from 'react-spring';
 import { GridViewRounded, RotateLeft } from "@mui/icons-material";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import WordTile from './WordTile'
 
 import styles from "./MainComponent.module.css";
+import reactLogo from "../assets/R.png";
+import amdLogo from "../assets/amd.png";
 
 const MainComponent = () => {
     const [wordInput, setWordInput] = useState("");
     const [wordList, setWordList] = useState([]);
     const [arranged, setArranged] = useState(false);
-
-    // const transitions = useTransition(wordList, {
-    //     from: { x: -100, y: 800, opacity: 0 },
-    //     enter: { x: 0, y: 0, opacity: 1},
-    //     leave: {}
-    // })
 
     // function to arrange an alphabetically sorted word list
     const arrangeSortedList = words => {
@@ -50,8 +46,12 @@ const MainComponent = () => {
         if(wordInput.length === 0)
             return;
 
-        const inputList = wordInput.split(" ").sort().map(word => word.charAt(0).toUpperCase() + word.substring(1))
-        setWordList(arrangeSortedList(inputList));
+        const inputList = wordInput.split(" ")
+                                   .map(word => word.toLowerCase())
+                                   .sort()
+                                   .map(word => word.charAt(0).toUpperCase() + word.substring(1))
+
+        setWordList(arrangeSortedList(inputList.filter((word, i) => inputList.indexOf(word) === i)));
         setArranged(true);
     }
 
@@ -103,11 +103,15 @@ const MainComponent = () => {
                                 key={word} item xs={3} 
                                 style={{ padding: "16px", height: "150px"}}
                             >
-                                <WordTile word={word} onRemove={removeWord}  />  
+                                <WordTile word={word} onRemove={removeWord}  />
                             </Grid>
                 })
             }
         </Grid>
+        <div className={styles.logos}>
+            <img src={reactLogo} alt="ReactJS Logo" width="140px" />
+            <img src={amdLogo} className={styles.amd} alt="AMD Logo" width="200px" />
+        </div>
     </div>
   )
 }

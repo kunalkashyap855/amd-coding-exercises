@@ -11,3 +11,15 @@
     justify-content: space-around;
     width: 100%;
 }
+
+.logos {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.amd {
+    align-self: center;
+}
