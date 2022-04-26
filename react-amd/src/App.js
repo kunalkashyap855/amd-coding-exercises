@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { Typography } from '@mui/material';
 import './App.css';
 
 import MainComponent from './components/MainComponent';

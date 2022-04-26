@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Grid } from "@mui/material"
+import { Grid, Button, IconButton, TextField } from "@mui/material"
+// import { useTransition, animated } from 'react-spring';
+import { GridViewRounded, RotateLeft } from "@mui/icons-material";
 
 import WordTile from './WordTile'
 
@@ -8,17 +10,29 @@ import styles from "./MainComponent.module.css";
 const MainComponent = () => {
     const [wordInput, setWordInput] = useState("");
     const [wordList, setWordList] = useState([]);
+    const [arranged, setArranged] = useState(false);
+
+    // const transitions = useTransition(wordList, {
+    //     from: { x: -100, y: 800, opacity: 0 },
+    //     enter: { x: 0, y: 0, opacity: 1},
+    //     leave: {}
+    // })
 
     // function to arrange an alphabetically sorted word list
     const arrangeSortedList = words => {
         const n = words.length;
+
+        let numRows = 0;
+        if(n % 4 === 0)
+            numRows = n / 4;
+        else numRows = parseInt(n / 4) + 1;
 
         let currIndex = 0;
         let arrangedList = new Array(n);
         let r = 0;
         while(currIndex < n) {
             let i = 0;
-            for(i; i < 3; i++) {
+            for(i; i < numRows; i++) {
                 if((r + (4 * i)) >= n) {
                     break;
                 }
@@ -33,14 +47,19 @@ const MainComponent = () => {
 
     // Split the string into an array of words, sort them alphabetically and arrange them when 'Arrange' is pressed
     const handleArrange = () => {
-        const inputList = wordInput.split(" ").sort()
+        if(wordInput.length === 0)
+            return;
+
+        const inputList = wordInput.split(" ").sort().map(word => word.charAt(0).toUpperCase() + word.substring(1))
         setWordList(arrangeSortedList(inputList));
+        setArranged(true);
     }
 
     // Empty the input string and the words list when 'Reset' is pressed
     const handleReset = () => {
         setWordInput("")
         setWordList([])
+        setArranged(false);
     }
 
     // Remove the pressed word, sort the word list aplhabetically and re-arrange the words when a word is pressed
@@ -48,7 +67,9 @@ const MainComponent = () => {
         let newList = wordList.filter(ele => ele !== word);
         newList = newList.sort();
 
-        setWordList(arrangeSortedList(newList));
+        if(newList.length === 0) {
+            handleReset();
+        } else setWordList(arrangeSortedList(newList));
     }
 
     // Call th handleArrange function when "Enter" key is pressed
@@ -60,24 +81,29 @@ const MainComponent = () => {
 
   return (
     <div className={styles.main}>
-        <input 
-            name='wordInput' 
-            value={wordInput} 
-            onChange={e => setWordInput(e.target.value)} 
-            onKeyDown={handleEnter} 
-        />
-        <div>
-            <button onClick={handleArrange}>Arrange</button>
-            <button onClick={handleReset}>Reset</button>
-        </div>
-        <Grid container spacing={4} style={{ border: "1px solid #b9b9b9d4", marginTop: "2%", height: "auto"}}>
+        <div className={styles.inputButton}>
+            <TextField 
+                id="wordInput-basic" 
+                label="Enter words separated by a space" 
+                variant="outlined" 
+                value={wordInput}
+                onChange={e => setWordInput(e.target.value)} 
+                onKeyDown={handleEnter} 
+                style={{ width: "80%"}}
+            />
+            {
+                arranged ? <Button variant="outlined" onClick={handleReset} startIcon={<RotateLeft />}>Reset</Button>
+                        : <Button variant="contained" onClick={handleArrange} startIcon={<GridViewRounded />} disableElevation>Arrange</Button>
+            }
+        </div> 
+        <Grid container spacing={4} style={{marginTop: "2%", height: "auto"}}>
             {
                 wordList.map(word => {
                     return  <Grid 
                                 key={word} item xs={3} 
-                                style={{ padding: "16px", height: "auto", borderBottom: "1px solid #b9b9b9d4", borderRight: "1px solid #b9b9b9d4"}}
+                                style={{ padding: "16px", height: "150px"}}
                             >
-                                <WordTile word={word} onRemove={removeWord}  />
+                                <WordTile word={word} onRemove={removeWord}  />  
                             </Grid>
                 })
             }

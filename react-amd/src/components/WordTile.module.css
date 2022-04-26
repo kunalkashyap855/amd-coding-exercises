@@ -1,9 +1,16 @@
 .tile {
-    border: 1px solid #b9b9b9d4;
-    background-color: lightgrey;
+    /* border: 1px solid #b9b9b9d4; */
+    /* background-color: lightgrey; */
     width: 50%;
+    height: 100%;
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.tile:hover {
+    border: 2px solid rgb(227, 70, 70);
+    background-color: rgb(240, 119, 119);
+    color: white;
 }

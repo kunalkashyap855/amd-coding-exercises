@@ -5,3 +5,9 @@
     height: auto;
     width: 100%;
 }
+
+.inputButton {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
