@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Grid, Button, IconButton, TextField } from "@mui/material"
+import { Grid, Button, TextField } from "@mui/material"
 import { GridViewRounded, RotateLeft } from "@mui/icons-material";
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import WordTile from './WordTile'
 
